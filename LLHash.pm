@@ -1,10 +1,10 @@
 package Tie::LLHash;
+
 use strict;
-use vars qw($VERSION);
+use warnings;
 use Carp;
 
-
-$VERSION = '1.003_01';
+our $VERSION = '1.003_01';
 
 sub TIEHASH {
    my $pkg = shift;
