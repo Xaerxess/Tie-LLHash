@@ -382,9 +382,10 @@ simply because iteration is probably important to people who need ordered data.
 =over 4
 
 =item * Unless you're using lazy-mode, don't add new elements to the hash by
-simple assignment, a la <$hash{$new_key} = $value>, because LLHash won't
+simple assignment, a la C<$hash{$new_key} = $value>, because LLHash won't
 know where in the order to put the new element.
 
+=back
 
 =head1 TO DO
 
