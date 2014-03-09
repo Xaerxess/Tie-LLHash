@@ -73,34 +73,34 @@ use Tie::LLHash;
 
     is_deeply [ keys %hash ], \@result;
   }
+}
 
-  # Create a new hash with an initialization hash
-  {
-    my @keys = qw(zero one two three four five six seven eight);
-    tie(my %hash2, 'Tie::LLHash', map { $keys[$_], $_ } 0..8);
+# Create a new hash with an initialization hash
+{
+  my @keys = qw(zero one two three four five six seven eight);
+  tie(my %hash, 'Tie::LLHash', map { $keys[$_], $_ } 0..8);
 
-    is_deeply [ keys %hash2 ], \@keys;
-    is_deeply [ values %hash2 ], [ 0..8 ];
-    my $i = 0;
-    is_deeply \%hash2, { map { $_ => $i++ } @keys };
-  }
+  is_deeply [ keys %hash ], \@keys;
+  is_deeply [ values %hash ], [ 0..8 ];
+  my $i = 0;
+  is_deeply \%hash, { map { $_ => $i++ } @keys };
+}
 
-  # Use insert() to add an item at the beginning
-  {
-    my $t = tie(my %hash2, 'Tie::LLHash', one => 1);
-    $t->insert(zero => 0);
-    is $t->first, 'zero';
-    is $t->last, 'one';
-  }
+# Use insert() to add an item at the beginning
+{
+  my $t = tie(my %hash, 'Tie::LLHash', one => 1);
+  $t->insert(zero => 0);
+  is $t->first, 'zero';
+  is $t->last, 'one';
+}
 
-  # Lazy mode
-  {
-    tie(my %hash2, 'Tie::LLHash', { lazy => 1 }, zero => 0);
-    $hash2{one} = 1;
-    my @keys = keys %hash2;
-    is $keys[0], 'zero';
-    is $keys[1], 'one';
-  }
+# Lazy mode
+{
+  tie(my %hash, 'Tie::LLHash', { lazy => 1 }, zero => 0);
+  $hash{one} = 1;
+  my @keys = keys %hash;
+  is $keys[0], 'zero';
+  is $keys[1], 'one';
 }
 
 {
