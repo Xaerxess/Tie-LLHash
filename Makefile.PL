@@ -12,6 +12,9 @@ my %WriteMakefileArgs = (
         'strict' => 0,
         'warnings' => 0,
     },
+    TEST_REQUIRES => {
+        'Test::More' => 0.88,
+    },
     ABSTRACT_FROM => 'lib/Tie/LLHash.pm',
     AUTHOR => 'Ken Williams <ken@forum.swarthmore.edu>',
     LICENSE => 'perl_5',
@@ -32,6 +35,13 @@ my %WriteMakefileArgs = (
         TESTS => "t/*.t"
     },
 );
+
+unless (eval { ExtUtils::MakeMaker->VERSION(6.64) }) {
+    my $test_requires = delete $WriteMakefileArgs{TEST_REQUIRES};
+    if (eval { ExtUtils::MakeMaker->VERSION(6.5503) }) {
+        $WriteMakefileArgs{BUILD_REQUIRES} = $test_requires;
+    }
+}
 
 unless (eval { ExtUtils::MakeMaker->VERSION(6.48) }) {
     delete $WriteMakefileArgs{MIN_PERL_VERSION};
