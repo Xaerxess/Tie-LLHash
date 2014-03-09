@@ -1,10 +1,9 @@
-$^W = 1;
-
 use strict;
+use warnings;
+
 use Test;
-BEGIN { plan tests => 22 }
+BEGIN { plan tests => 21 }
 use Tie::LLHash;
-ok 1;
 
 {
   my (%hash, %hash2);
