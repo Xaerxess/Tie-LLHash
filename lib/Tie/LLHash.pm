@@ -394,13 +394,20 @@ know where in the order to put the new element.
 
 =back
 
-=head1 TO DO
+=head1 TODO
 
-I could speed up the keys() routine in a scalar context if I knew how to
-sense when NEXTKEY is being called on behalf of keys().  Not sure whether
+=over 4
+
+=item * Add support for NEXTKEY and next with
+L<additional argument|http://perldoc.perl.org/perltie.html#NEXTKEY-this%2c-lastkey>.
+
+=item * I could speed up the keys() routine in a scalar context if I knew how
+to sense when NEXTKEY is being called on behalf of keys().  Not sure whether
 this is possible.
 
-I may also want to add a method for... um, I forgot.  Something.
+=item * I may also want to add a method for... um, I forgot.  Something.
+
+=back
 
 =head1 AUTHOR
 
