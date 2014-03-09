@@ -6,31 +6,32 @@ END { done_testing }
 use Tie::LLHash;
 
 {
-  my (%hash, %hash2);
+  # Test the tie interface
+  tie(my %hash, 'Tie::LLHash');
+  isa_ok tied %hash, 'Tie::LLHash';
 
-  # 2: Test the tie interface
-  tie (%hash, "Tie::LLHash");
-  ok tied %hash;
-
-  # 3: Add first element
+  # Add first element
   (tied %hash)->first('firstkey', 'firstval');
-  ok $hash{firstkey} eq 'firstval';
+  is $hash{firstkey}, 'firstval';
 
-  # 4: Add more elements
+  # Add more elements
   (tied %hash)->insert( red => 'rudolph', 'firstkey');
   (tied %hash)->insert( orange => 'julius', 'red');
-  ok( $hash{red} eq 'rudolph' 
-		  and $hash{orange} eq 'julius'
-		  and (keys(%hash))[0] eq 'firstkey'
-		  and (keys(%hash))[1] eq 'red'
-		  and (keys(%hash))[2] eq 'orange' );
+  is $hash{red}, 'rudolph';
+  is $hash{orange}, 'julius';
+  {
+    my @keys = keys %hash;
+    is $keys[0], 'firstkey';
+    is $keys[1], 'red';
+    is $keys[2], 'orange';
+  }
 
-  # 5: Delete first element
+  # Delete first element
   delete $hash{firstkey};
-  ok( keys %hash  == 2
-		  and not exists $hash{firstkey} );
+  is keys %hash, 2;
+  ok !exists $hash{firstkey};
 
-  # 6: Delete all elements
+  # Delete all elements
   {
     my $o = delete $hash{orange};
     is $o, 'julius';
@@ -41,99 +42,87 @@ use Tie::LLHash;
     ok !exists $hash{red};
 
     is keys %hash, 0;
+    ok !scalar %hash;
   }
 
-  # 7: Exercise the ->last method
+  # Exercise the ->last method
   {
-    my ($i, $bad);
-    for ($i=0; $i<10; $i++) {
-      (tied %hash)->last($i, $i**2);
+    for my $i (0..9) {
+      (tied %hash)->last($i, 1);
     }
 
-    $i=0;
-    foreach (keys %hash) {
-      $bad++ if ($i++ ne $_);
-    }
-    ok !$bad;
+    is_deeply [ keys %hash ], [ 0..9 ];
   }
 
-  # 8: scalar context and delete all contents
+  # Scalar context and delete all contents
   ok scalar %hash;
   %hash = ();
   ok !%hash;
 
-  # 9: Combine some ->first and ->last action
+  # Combine some ->first and ->last action
   {
     my @result = qw(1 6 4 5 7 9 n r);
-    (tied %hash)->first(5=>1);
-    (tied %hash)->last (7=>1);
-    (tied %hash)->last (9=>1);
-    (tied %hash)->first(4=>1);
-    (tied %hash)->last (n=>1);
-    (tied %hash)->first(6=>1);
-    (tied %hash)->first(1=>1);
-    (tied %hash)->last (r=>1);
-		
-    my ($i, $bad);
-    foreach (keys %hash) {
-      $bad++ if ($_ ne $result[$i++]);
-    }
-    ok !$bad;
+    (tied %hash)->first(5 => 1);
+    (tied %hash)->last (7 => 1);
+    (tied %hash)->last (9 => 1);
+    (tied %hash)->first(4 => 1);
+    (tied %hash)->last (n => 1);
+    (tied %hash)->first(6 => 1);
+    (tied %hash)->first(1 => 1);
+    (tied %hash)->last (r => 1);
+
+    is_deeply [ keys %hash ], \@result;
   }
 
-  # 10: create a new hash with an initialization hash
+  # Create a new hash with an initialization hash
   {
     my @keys = qw(zero one two three four five six seven eight);
+    tie(my %hash2, 'Tie::LLHash', map { $keys[$_], $_ } 0..8);
 
-    tie(%hash2, 'Tie::LLHash', map {$keys[$_], $_} 0..8);
-    my ($bad, $i) = (0,0);
-		
-    foreach (keys %hash2) {
-      $bad++ unless ($_ eq $keys[$i]  and  $hash2{$_} eq $i++); 
-    }
-
-    ok !$bad;
+    is_deeply [ keys %hash2 ], \@keys;
+    is_deeply [ values %hash2 ], [ 0..8 ];
+    my $i = 0;
+    is_deeply \%hash2, { map { $_ => $i++ } @keys };
   }
 
-  # 11: use insert() to add an item at the beginning
-  untie %hash2;
+  # Use insert() to add an item at the beginning
   {
-    my $t = tie(%hash2, 'Tie::LLHash', one=>1);
-    $t->insert(zero=>0);
-    ok( $t->first eq 'zero' and $t->last eq 'one' );
+    my $t = tie(my %hash2, 'Tie::LLHash', one => 1);
+    $t->insert(zero => 0);
+    is $t->first, 'zero';
+    is $t->last, 'one';
   }
 
-  # 12: lazy mode
-  untie %hash2;
+  # Lazy mode
   {
-    tie(%hash2, 'Tie::LLHash', {lazy=>1}, zero=>0);
-    $hash2{one}=1;
-    my @k = keys %hash2;
-    ok( $k[0] eq 'zero' and $k[1] eq 'one' );
+    tie(my %hash2, 'Tie::LLHash', { lazy => 1 }, zero => 0);
+    $hash2{one} = 1;
+    my @keys = keys %hash2;
+    is $keys[0], 'zero';
+    is $keys[1], 'one';
   }
 }
 
 {
   # Test deletes in a loop
-  tie my(%hash), "Tie::LLHash", {lazy => 1};
-  ok tied %hash;
-  
+  tie(my %hash, 'Tie::LLHash', { lazy => 1 });
+
   $hash{one} = 1;
   $hash{two} = 2;
   $hash{three} = 3;
   is keys %hash, 3;
-  
+
   my ($k, $v) = each %hash;
   is $k, 'one';
   delete $hash{$k};
-  
+
   ($k, $v) = each %hash;
   is $k, 'two';
   delete $hash{$k};
-  
+
   ($k, $v) = each %hash;
   is $k, 'three';
   delete $hash{$k};
-  
+
   is keys %hash, 0;
 }
