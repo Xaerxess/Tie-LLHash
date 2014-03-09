@@ -66,7 +66,6 @@ sub EXISTS {
 sub DELETE {
   my $self = shift;
   my $key = shift;
-  #my $debug = 0;
 
   return unless $self->EXISTS($key);
   my $node = $self->{'nodes'}{$key};
