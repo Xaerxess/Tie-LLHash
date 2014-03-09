@@ -220,12 +220,20 @@ sub current_value {
    return $self->FETCH($self->{'current'});
 }
 
-sub next  { my $s=shift; $s->NEXTKEY($_) }
-sub prev  {
+sub next {
+   my $self = shift;
+   return $self->NEXTKEY;
+}
+
+sub prev {
    my $self = shift;
    return $self->{'current'} = $self->{'nodes'}{ $self->{'current'} }{'prev'};
 }
-sub reset { my $s=shift; $s->FIRSTKEY($_) }
+
+sub reset {
+   my $self = shift;
+   return $self->FIRSTKEY;
+}
 
 1;
 __END__
