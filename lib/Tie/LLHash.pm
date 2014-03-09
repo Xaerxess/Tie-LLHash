@@ -242,9 +242,9 @@ Perl hash and a linked list.  Use it whenever you want the speed and
 structure of a Perl hash, but the orderedness of a list.
 
 Don't use it if you want to be able to address your hash entries by number,
-like you can in a real list ($list[5]).
+like you can in a real list (e.g. C<$list[5]>).
 
-See also Tie::IxHash by Gurusamy Sarathy.  It's similar (it also does
+See also L<Tie::IxHash> by Gurusamy Sarathy.  It's similar (it also does
 ordered hashes), but it has a different internal data structure and a
 different flavor of usage.  IxHash stores its data internally as both
 a hash and an array in parallel.  LLHash stores its data as a
