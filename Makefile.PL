@@ -5,14 +5,14 @@ use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
     NAME => 'Tie::LLHash',
-    VERSION_FROM => 'LLHash.pm',
+    VERSION_FROM => 'lib/Tie/LLHash.pm',
     MIN_PERL_VERSION => '5.6.0',
     PREREQ_PM => {
         'Carp' => 0,
         'strict' => 0,
         'warnings' => 0,
     },
-    ABSTRACT_FROM => 'LLHash.pm',
+    ABSTRACT_FROM => 'lib/Tie/LLHash.pm',
     AUTHOR => 'Ken Williams <ken@forum.swarthmore.edu>',
     LICENSE => 'perl_5',
     META_MERGE => {
