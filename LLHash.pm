@@ -4,7 +4,7 @@ use vars qw($VERSION);
 use Carp;
 
 
-$VERSION = '1.003';
+$VERSION = '1.003_01';
 
 sub TIEHASH {
    my $pkg = shift;
