@@ -16,7 +16,7 @@ my %WriteMakefileArgs = (
         'Test::More' => 0.88,
     },
     ABSTRACT_FROM => 'lib/Tie/LLHash.pm',
-    AUTHOR => 'Ken Williams <ken@forum.swarthmore.edu>',
+    AUTHOR => 'Ken Williams <kwilliams@cpan.org>',
     LICENSE => 'perl_5',
     META_MERGE => {
         'meta-spec' => { version => 2 },
