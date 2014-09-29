@@ -240,7 +240,7 @@ __END__
 
 =head1 NAME
 
-Tie::LLHash.pm - ordered hashes
+Tie::LLHash - Ordered hashes
 
 =head1 DESCRIPTION
 
@@ -409,7 +409,7 @@ this is possible.
 
 =back
 
-=head1 AUTHOR
+=head1 COPYRIGHT AND LICENSE
 
 Ken Williams <kenahoo@gmail.com>
 
