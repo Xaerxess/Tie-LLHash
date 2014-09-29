@@ -3,6 +3,5 @@ lib/Tie/LLHash.pm
 LICENSE
 Makefile.PL
 MANIFEST
-META.yml			Module meta-data (added by MakeMaker)
 README
 t/01_basic.t
