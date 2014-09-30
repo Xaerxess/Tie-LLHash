@@ -7,3 +7,4 @@ README
 t/00_load.t
 t/01_basic.t
 t/10_changes.t
+t/11_kwalitee.t
