@@ -249,9 +249,9 @@ Perl hash and a linked list.  Use it whenever you want the speed and
 structure of a Perl hash, but the orderedness of a list.
 
 See also L<Tie::IxHash> by Gurusamy Sarathy.  It's similar (it also does
-ordered hashes), but it has a different internal data structure and a
-different flavor of usage.  L<Tie::IxHash> stores its data internally as both
-a hash and an array in parallel.  C<Tie::LLHash> stores its data as a
+tied ordered hashes), but it has a different internal data structure and a
+different flavor of usage.  L<Tie::IxHash> stores its data internally as
+both a hash and an array in parallel.  C<Tie::LLHash> stores its data as a
 bidirectional linked list, making both inserts and deletes very fast.
 L<Tie::IxHash> therefore makes your hash behave more like a list than
 C<Tie::LLHash> does.  This module keeps more of the hash flavor.
@@ -289,7 +289,7 @@ C<Tie::LLHash> does.  This module keeps more of the hash flavor.
  (tied %hash)->prev;
  (tied %hash)->reset;
 
- # If lazy-mode is set, new keys will be added at the end.
+ # If lazy mode is set, new keys will be added at the end.
  $hash{newkey} = 'newval';
  $hash{newkey2} = 'newval2';
 
@@ -385,9 +385,9 @@ simply because iteration is probably important to people who need ordered data.
 
 =over 4
 
-=item * Unless you're using lazy-mode, don't add new elements to the hash by
-simple assignment, a la C<$hash{$new_key} = $value>, because LLHash won't
-know where in the order to put the new element.
+=item * Unless you're using lazy mode, don't add new elements to the hash by
+simple assignment, a la C<$hash{$new_key} = $value>, because C<Tie::LLHash>
+won't know where in the order to put the new element and die.
 
 =back
 
@@ -409,6 +409,8 @@ this is possible.
 =over 4
 
 =item * L<Tie::IxHash>
+
+=item * L<Hash::Ordered>
 
 =back
 
