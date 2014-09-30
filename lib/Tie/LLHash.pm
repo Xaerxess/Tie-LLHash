@@ -248,16 +248,13 @@ This class implements an ordered hash-like object.  It's a cross between a
 Perl hash and a linked list.  Use it whenever you want the speed and
 structure of a Perl hash, but the orderedness of a list.
 
-Don't use it if you want to be able to address your hash entries by number,
-like you can in a real list (e.g. C<$list[5]>).
-
 See also L<Tie::IxHash> by Gurusamy Sarathy.  It's similar (it also does
 ordered hashes), but it has a different internal data structure and a
-different flavor of usage.  IxHash stores its data internally as both
-a hash and an array in parallel.  LLHash stores its data as a
+different flavor of usage.  L<Tie::IxHash> stores its data internally as both
+a hash and an array in parallel.  C<Tie::LLHash> stores its data as a
 bidirectional linked list, making both inserts and deletes very fast.
-IxHash therefore makes your hash behave more like a list than LLHash
-does.  This module keeps more of the hash flavor.
+L<Tie::IxHash> therefore makes your hash behave more like a list than
+C<Tie::LLHash> does.  This module keeps more of the hash flavor.
 
 =head1 SYNOPSIS
 
@@ -405,7 +402,13 @@ L<additional argument|http://perldoc.perl.org/perltie.html#NEXTKEY-this%2c-lastk
 to sense when NEXTKEY is being called on behalf of keys().  Not sure whether
 this is possible.
 
-=item * I may also want to add a method for... um, I forgot.  Something.
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<Tie::IxHash>
 
 =back
 
