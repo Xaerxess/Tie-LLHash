@@ -14,6 +14,8 @@ Development
 
  - migrated tests to Test::More
 
+ - updated README
+
 1.003  2004-03-13 16:53:28
 
  - delete($hash{$key}) now returns the associated value, previously it
