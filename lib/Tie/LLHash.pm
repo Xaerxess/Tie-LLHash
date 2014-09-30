@@ -276,8 +276,8 @@ C<Tie::LLHash> does.  This module keeps more of the hash flavor.
  (tied %hash)->last('by' => 'gum');
 
  $value = $hash{'things'}; # Look up a value
- $hash{'here'} = 'NOW';    # Set the value of an EXISTING RECORD!
-
+ $hash{'here'} = 'NOW';    # Set the value of an existing record
+                           # or insert as last node in lazy mode
 
  $key = (tied %hash)->key_before('in');  # Returns the previous key
  $key = (tied %hash)->key_after('in');   # Returns the next key
