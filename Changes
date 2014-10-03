@@ -2,6 +2,10 @@ Change log for Tie-LLHash:
 
 Development
 
+ - updated README
+
+1.003_01  2014-09-30  XAERXESS
+
  - Grzegorz Rożniecki (XAERXESS) has taken over maintenance
 
  - updated revision history in Changes (as per CPAN::Changes::Spec)
@@ -13,8 +17,6 @@ Development
  - tweaked Makefile.PL
 
  - migrated tests to Test::More
-
- - updated README
 
 1.003  2004-03-13 16:53:28
 
