@@ -4,6 +4,8 @@ Development
 
  - added explicit SCALAR implementation, as perltie suggests
 
+ - added warning about hash behavior in scalar context on Perls < 5.8.3
+
  - updated README
 
 1.003_01  2014-09-30  XAERXESS

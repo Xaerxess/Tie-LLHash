@@ -392,7 +392,11 @@ simply because iteration is probably important to people who need ordered data.
 
 =item * Unless you're using lazy mode, don't add new elements to the hash by
 simple assignment, a la C<$hash{$new_key} = $value>, because C<Tie::LLHash>
-won't know where in the order to put the new element and die.
+won't know where in the order to put the new element and will die.
+
+=item * Evaluating tied hash in scalar context wasn't implemented until Perl
+5.8.3, so on earlier Perl versions it will always return 0, even if hash is not
+empty.
 
 =back
 
