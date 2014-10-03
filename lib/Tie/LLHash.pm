@@ -104,6 +104,11 @@ sub CLEAR {
    $self->{'nodes'} = {};
 }
 
+sub SCALAR {
+    my $self = shift;
+    return scalar %{$self->{'nodes'}};
+}
+
 # Special access methods
 # Use (tied %hash)->method to get at them
 

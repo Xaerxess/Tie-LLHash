@@ -2,6 +2,8 @@ Change log for Tie-LLHash:
 
 Development
 
+ - added explicit SCALAR implementation, as perltie suggests
+
  - updated README
 
 1.003_01  2014-09-30  XAERXESS
