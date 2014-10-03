@@ -2,6 +2,8 @@ Change log for Tie-LLHash:
 
 Development
 
+1.004  2014-10-03  XAERXESS
+
  - added explicit SCALAR implementation, as perltie suggests
 
  - added warning about hash behavior in scalar context on Perls < 5.8.3

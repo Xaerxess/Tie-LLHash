@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp;
 
-our $VERSION = '1.003_01';
+our $VERSION = '1.004';
 
 sub TIEHASH {
    my $pkg = shift;
